@@ -1,0 +1,12 @@
+# Socket activation: ~/.config/systemd/user/htadb.socket
+# Pair with htadb.service using `ExecStart=%h/.local/bin/htadb --listen systemd:`
+# (and no [Install] section in the service).
+#   systemctl --user enable --now htadb.socket
+[Socket]
+ListenStream=127.0.0.1:10443
+# A unix socket for a reverse proxy or socat:
+# ListenStream=%t/htadb.sock
+# SocketMode=0660
+
+[Install]
+WantedBy=sockets.target

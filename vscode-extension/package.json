@@ -1,0 +1,68 @@
+{
+  "name": "htadb",
+  "displayName": "htadb — ADB terminal and mirroring",
+  "description": "ADB devices, a browser terminal and device mirroring in VS Code's integrated browser, served by htadb.",
+  "version": "0.1.0",
+  "publisher": "htadb",
+  "engines": { "vscode": "^1.109.0" },
+  "categories": ["Other"],
+  "keywords": ["adb", "android", "mirroring", "scrcpy", "terminal"],
+  "main": "./extension.js",
+  "activationEvents": ["onStartupFinished"],
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [{ "id": "htadb", "title": "ADB Devices", "icon": "media/devices.svg" }]
+    },
+    "views": {
+      "htadb": [{ "id": "htadb.devices", "name": "ADB Devices", "icon": "media/devices.svg" }]
+    },
+    "commands": [
+      { "command": "htadb.openTerminal", "title": "Open Terminal", "category": "htadb", "icon": "$(terminal)" },
+      { "command": "htadb.mirrorDevice", "title": "Mirror Device", "category": "htadb", "icon": "$(vm)" },
+      { "command": "htadb.startAdapter", "title": "Start Adapter", "category": "htadb", "icon": "$(play)" },
+      { "command": "htadb.stopAdapter", "title": "Stop Adapter", "category": "htadb", "icon": "$(debug-stop)" },
+      { "command": "htadb.restartAdapter", "title": "Restart Adapter", "category": "htadb", "icon": "$(debug-restart)" },
+      { "command": "htadb.refresh", "title": "Refresh Devices", "category": "htadb", "icon": "$(refresh)" },
+      { "command": "htadb.showLog", "title": "Show Log", "category": "htadb", "icon": "$(output)" }
+    ],
+    "menus": {
+      "view/title": [
+        { "command": "htadb.refresh", "when": "view == htadb.devices", "group": "navigation@1" },
+        { "command": "htadb.stopAdapter", "when": "view == htadb.devices", "group": "navigation@2" },
+        { "command": "htadb.restartAdapter", "when": "view == htadb.devices", "group": "more@1" },
+        { "command": "htadb.showLog", "when": "view == htadb.devices", "group": "more@2" }
+      ],
+      "view/item/context": [
+        { "command": "htadb.openTerminal", "when": "view == htadb.devices && viewItem == device", "group": "inline@1" },
+        { "command": "htadb.mirrorDevice", "when": "view == htadb.devices && viewItem == device", "group": "inline@2" },
+        { "command": "htadb.openTerminal", "when": "view == htadb.devices && viewItem == device", "group": "1_open@1" },
+        { "command": "htadb.mirrorDevice", "when": "view == htadb.devices && viewItem == device", "group": "1_open@2" }
+      ],
+      "commandPalette": [
+        { "command": "htadb.refresh", "when": "false" }
+      ]
+    },
+    "configuration": {
+      "title": "htadb",
+      "properties": {
+        "htadb.url": { "type": "string", "default": "", "markdownDescription": "Use an existing htadb (e.g. `http://127.0.0.1:10443`). Empty starts the bundled binary." },
+        "htadb.binaryPath": { "type": "string", "default": "", "scope": "machine", "description": "Path to an htadb binary to run instead of the bundled one." },
+        "htadb.args": { "type": "array", "items": { "type": "string" }, "default": [], "scope": "machine", "markdownDescription": "Extra arguments for the managed htadb, e.g. `[\"--adb-server\", \"127.0.0.1:5037\"]`." },
+        "htadb.managed.useTls": { "type": "boolean", "default": false, "markdownDescription": "Run the managed htadb on `https://127.0.0.1` with its generated local CA instead of plain loopback HTTP (which is already a secure context)." },
+        "htadb.browser": { "type": "string", "enum": ["integrated", "external"], "default": "integrated", "enumDescriptions": ["Open pages in VS Code's integrated browser (simpleBrowser.show).", "Open pages in the system browser."], "description": "Where htadb pages open." },
+        "htadb.mirror.defaults": {
+          "type": "object", "default": {}, "markdownDescription": "Mirroring page defaults: `maxSize` (e.g. 1920), `bitrate` (bit/s, e.g. 8000000), `fps`, `audio`, `control`, `stayAwake`, `turnScreenOff`.",
+          "properties": {
+            "maxSize": { "type": "number" }, "bitrate": { "type": "number" }, "fps": { "type": "number" },
+            "audio": { "type": "boolean" }, "control": { "type": "boolean" }, "stayAwake": { "type": "boolean" }, "turnScreenOff": { "type": "boolean" }
+          }
+        },
+        "htadb.mirror.hotkeys": { "type": "object", "default": {}, "markdownDescription": "Mirroring hotkeys: `{ \"modifier\": \"Alt\" | \"Ctrl+Alt\" | \"Meta\" | \"Ctrl\", \"bindings\": { \"home\": \"Mod+KeyH\", … } }` (the format of the page's Export JSON)." },
+        "htadb.mirror.serverVersion": { "type": "string", "default": "auto", "markdownDescription": "Default mirroring server version (`auto` = newest, with fallback to 4.x)." },
+        "htadb.mirror.fallback": { "type": "boolean", "default": true, "description": "Fall back to the newest 4.x mirroring server when 5.0 cannot run on a device." },
+        "htadb.mirror.devices": { "type": "object", "default": {}, "markdownDescription": "Per-device mirroring settings, e.g. `{ \"R58M12345\": { \"version\": \"4.1\", \"max_size\": 1280 } }`. A version set here never falls back." },
+        "htadb.suppressIntegratedBrowserWarning": { "type": "boolean", "default": false, "description": "Don't warn when pages would open in the classic Simple Browser." }
+      }
+    }
+  }
+}

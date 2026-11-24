@@ -1,0 +1,10 @@
+/bin/
+/.cache/
+/dist/
+/internal/mirror/servers/embedded/*.jar
+/internal/ui/dist/*
+!/internal/ui/dist/.keep
+/testdata-gen/
+/vscode-extension/bin/
+/vscode-extension/*.vsix
+/web/vendor/

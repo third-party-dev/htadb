@@ -1,0 +1,16 @@
+# <user config dir>/htadb/config.toml  (~/.config/htadb/config.toml on Linux)
+# Keys are flag names (dashes or underscores); flags and HTADB_* variables win.
+
+listen = ["http://127.0.0.1:10443", "unix:///run/user/1000/htadb.sock"]
+adb-server = "127.0.0.1:5037"
+cors-origin = "*"
+
+[mirror]
+default-version = "5.0.1"   # → --mirror-default-version
+fallback = true             # → --mirror-fallback
+
+# Per-device settings. A version set here is explicit: it never falls back.
+[mirror.devices."R58M12345"]
+version = "4.1"
+max_size = 1280
+video_bit_rate = 8000000

@@ -1,0 +1,12 @@
+# systemd user unit: ~/.config/systemd/user/htadb.service
+#   systemctl --user daemon-reload && systemctl --user enable --now htadb
+[Unit]
+Description=htadb (adb over HTTP/WebSocket)
+After=network.target
+
+[Service]
+ExecStart=%h/.local/bin/htadb --listen http://127.0.0.1:10443
+Restart=on-failure
+
+[Install]
+WantedBy=default.target

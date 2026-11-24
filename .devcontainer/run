@@ -1,0 +1,14 @@
+#!/bin/sh
+# Run a command inside the htadb-dev container with the repo mounted at /src.
+#   .devcontainer/run go test ./...
+#   .devcontainer/run make htadb
+# Build the image first: docker build -t htadb-dev .devcontainer
+set -e
+here=$(cd "$(dirname "$0")/.." && pwd)
+docker volume inspect htadb-go >/dev/null 2>&1 || {
+	docker volume create htadb-go >/dev/null
+	docker run --rm -v htadb-go:/go htadb-dev chown "$(id -u):$(id -g)" /go
+}
+tty=; [ -t 0 ] && tty=-it
+exec docker run --rm $tty -u "$(id -u):$(id -g)" -e HOME=/tmp -e GOFLAGS="${GOFLAGS:-}" \
+	-v "$here":/src -v htadb-go:/go -w /src ${DOCKER_ARGS:-} htadb-dev "$@"

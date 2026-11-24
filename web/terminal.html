@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>adb terminal</title>
+<link rel="stylesheet" href="vendor/xterm/xterm.css">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="app-header">
+  <a class="logo" href="index.html" id="home">ht<span>adb</span></a>
+  <nav aria-label="Pages">
+    <a href="terminal.html" aria-current="page" id="nav-term">Terminal</a>
+    <a href="mirror.html" id="nav-mirror">Mirroring</a>
+  </nav>
+  <div class="grow"></div>
+  <div class="header-device">
+    <label for="device">Device</label>
+    <select id="device"><option value="">no device</option></select>
+  </div>
+  <p class="status"><span class="dot" id="adb-dot"></span><span id="adb-status">connecting…</span></p>
+</header>
+<div class="banners" id="banners"></div>
+<div class="content">
+  <section class="main-col" aria-label="Terminal">
+    <div class="term-panel">
+      <div class="term-bar">
+        <p class="title" id="term-title">adb</p>
+        <button type="button" class="btn" id="clear">Clear</button>
+        <button type="button" class="btn" id="copy">Copy</button>
+      </div>
+      <div id="term"></div>
+    </div>
+  </section>
+  <aside class="side-col">
+    <section class="card" aria-labelledby="dev-h">
+      <h2 id="dev-h">Devices</h2>
+      <div class="devlist" id="devices"><p class="empty">Loading…</p></div>
+    </section>
+    <section class="card" aria-labelledby="qa-h">
+      <h2 id="qa-h">Quick actions</h2>
+      <div class="grid2">
+        <button type="button" class="tile" id="qa-push">Push file…</button>
+        <button type="button" class="tile" id="qa-pull">Pull file…</button>
+        <button type="button" class="tile" id="qa-install">Install APK…</button>
+        <button type="button" class="tile" id="qa-screencap">Screencap</button>
+      </div>
+    </section>
+    <section class="card" aria-labelledby="tx-h">
+      <h2 id="tx-h">Transfers</h2>
+      <div id="transfer" hidden>
+        <p class="transfer-name" id="tx-name"></p>
+        <div class="progress" role="progressbar" aria-label="Transfer progress" aria-valuemin="0" aria-valuemax="100" id="tx-bar"><div></div></div>
+        <p class="hint" style="margin-top:8px" id="tx-text"></p>
+      </div>
+      <p class="empty" id="tx-empty">No transfers yet.</p>
+    </section>
+  </aside>
+</div>
+<footer class="app-footer"><span id="f-version">htadb</span><span id="f-adb">adb server</span><span id="f-api"></span></footer>
+<script src="vendor/xterm/xterm.js"></script>
+<script type="module" src="terminal.js"></script>
+</body>
+</html>

@@ -1,0 +1,318 @@
+{
+ "source": "scrcpy v5.0.1 app/tests/test_control_msg_serialize.c, test_device_msg_deserialize.c, doc/develop.md",
+ "control": [
+  {
+   "name": "inject_keycode",
+   "fn": "injectKeycode",
+   "args": {
+    "action": 1,
+    "keycode": 66,
+    "repeat": 5,
+    "metastate": 65
+   },
+   "hex": "0001000000420000000500000041",
+   "since": "4.0"
+  },
+  {
+   "name": "inject_text",
+   "fn": "injectText",
+   "args": {
+    "text": "hello, world!"
+   },
+   "hex": "010000000d68656c6c6f2c20776f726c6421",
+   "since": "4.0"
+  },
+  {
+   "name": "inject_touch_event",
+   "fn": "injectTouch",
+   "args": {
+    "action": 0,
+    "pointerId": "0x1234567887654321",
+    "x": 100,
+    "y": 200,
+    "width": 1080,
+    "height": 1920,
+    "pressure": 1.0,
+    "actionButton": 1,
+    "buttons": 1
+   },
+   "hex": "0200123456788765432100000064000000c804380780ffff0000000100000001",
+   "since": "4.0"
+  },
+  {
+   "name": "inject_scroll_event",
+   "fn": "injectScroll",
+   "args": {
+    "x": 260,
+    "y": 1026,
+    "width": 1080,
+    "height": 1920,
+    "hscroll": 16,
+    "vscroll": -16,
+    "buttons": 1
+   },
+   "hex": "030000010400000402043807807fff800000000001",
+   "since": "4.0"
+  },
+  {
+   "name": "back_or_screen_on",
+   "fn": "backOrScreenOn",
+   "args": {
+    "action": 1
+   },
+   "hex": "0401",
+   "since": "4.0"
+  },
+  {
+   "name": "expand_notification_panel",
+   "fn": "expandNotificationPanel",
+   "args": {},
+   "hex": "05",
+   "since": "4.0"
+  },
+  {
+   "name": "expand_settings_panel",
+   "fn": "expandSettingsPanel",
+   "args": {},
+   "hex": "06",
+   "since": "4.0"
+  },
+  {
+   "name": "collapse_panels",
+   "fn": "collapsePanels",
+   "args": {},
+   "hex": "07",
+   "since": "4.0"
+  },
+  {
+   "name": "get_clipboard",
+   "fn": "getClipboard",
+   "args": {
+    "copyKey": 1
+   },
+   "hex": "0801",
+   "since": "4.0"
+  },
+  {
+   "name": "set_clipboard",
+   "fn": "setClipboard",
+   "args": {
+    "sequence": "0x0102030405060708",
+    "paste": true,
+    "text": "hello, world!"
+   },
+   "hex": "090102030405060708010000000d68656c6c6f2c20776f726c6421",
+   "since": "4.0"
+  },
+  {
+   "name": "set_display_power",
+   "fn": "setDisplayPower",
+   "args": {
+    "on": true
+   },
+   "hex": "0a01",
+   "since": "4.0"
+  },
+  {
+   "name": "rotate_device",
+   "fn": "rotateDevice",
+   "args": {},
+   "hex": "0b",
+   "since": "4.0"
+  },
+  {
+   "name": "uhid_create",
+   "fn": "uhidCreate",
+   "args": {
+    "id": 42,
+    "vendorId": 4660,
+    "productId": 22136,
+    "name": "ABC",
+    "reportDesc": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9,
+     10,
+     11
+    ]
+   },
+   "hex": "0c002a1234567803414243000b0102030405060708090a0b",
+   "since": "4.0"
+  },
+  {
+   "name": "uhid_input",
+   "fn": "uhidInput",
+   "args": {
+    "id": 42,
+    "data": [
+     1,
+     2,
+     3,
+     4,
+     5
+    ]
+   },
+   "hex": "0d002a00050102030405",
+   "since": "4.0"
+  },
+  {
+   "name": "uhid_destroy",
+   "fn": "uhidDestroy",
+   "args": {
+    "id": 42
+   },
+   "hex": "0e002a",
+   "since": "4.0"
+  },
+  {
+   "name": "open_hard_keyboard_settings",
+   "fn": "openHardKeyboardSettings",
+   "args": {},
+   "hex": "0f",
+   "since": "4.0"
+  },
+  {
+   "name": "start_app",
+   "fn": "startApp",
+   "args": {
+    "name": "firefox"
+   },
+   "hex": "100766697265666f78",
+   "since": "4.0"
+  },
+  {
+   "name": "reset_video",
+   "fn": "resetVideo",
+   "args": {},
+   "hex": "11",
+   "since": "4.0"
+  },
+  {
+   "name": "camera_set_torch",
+   "fn": "cameraSetTorch",
+   "args": {
+    "on": true
+   },
+   "hex": "1201",
+   "since": "4.0"
+  },
+  {
+   "name": "camera_zoom_in",
+   "fn": "cameraZoomIn",
+   "args": {},
+   "hex": "13",
+   "since": "4.0"
+  },
+  {
+   "name": "camera_zoom_out",
+   "fn": "cameraZoomOut",
+   "args": {},
+   "hex": "14",
+   "since": "4.0"
+  },
+  {
+   "name": "resize_display",
+   "fn": "resizeDisplay",
+   "args": {
+    "width": 1920,
+    "height": 1080
+   },
+   "hex": "1507800438",
+   "since": "4.0"
+  },
+  {
+   "name": "scan_file",
+   "fn": "scanFile",
+   "args": {
+    "path": "/sdcard/Download"
+   },
+   "hex": "16000000102f7364636172642f446f776e6c6f6164",
+   "since": "4.1"
+  }
+ ],
+ "device": [
+  {
+   "name": "clipboard",
+   "hex": "0000000003414243",
+   "type": 0,
+   "text": "ABC"
+  },
+  {
+   "name": "ack_clipboard",
+   "hex": "010102030405060708",
+   "type": 1,
+   "sequence": "0x0102030405060708"
+  },
+  {
+   "name": "uhid_output",
+   "hex": "02002a00050102030405",
+   "type": 2,
+   "id": 42,
+   "data": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ]
+  }
+ ],
+ "session": [
+  {
+   "name": "session_resized",
+   "version": "4.1",
+   "width": 1080,
+   "height": 2400,
+   "clientResized": true,
+   "hex": "800000010000043800000960"
+  },
+  {
+   "name": "session_resized_ignored_4.0",
+   "version": "4.0",
+   "width": 1080,
+   "height": 2400,
+   "clientResized": true,
+   "hex": "800000000000043800000960"
+  },
+  {
+   "name": "session_5.0",
+   "version": "5.0.1",
+   "width": 720,
+   "height": 1280,
+   "clientResized": false,
+   "hex": "80000000000002d000000500"
+  }
+ ],
+ "media": [
+  {
+   "name": "config",
+   "pts": 0,
+   "config": true,
+   "key": false,
+   "size": 27,
+   "hex": "40000000000000000000001b"
+  },
+  {
+   "name": "keyframe",
+   "pts": 1193046,
+   "config": false,
+   "key": true,
+   "size": 1000,
+   "hex": "2000000000123456000003e8"
+  },
+  {
+   "name": "delta",
+   "pts": 33333,
+   "config": false,
+   "key": false,
+   "size": 5,
+   "hex": "000000000000823500000005"
+  }
+ ]
+}

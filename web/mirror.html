@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>htadb mirroring</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="app-header">
+  <a class="logo" href="index.html" id="home">ht<span>adb</span></a>
+  <nav aria-label="Pages">
+    <a href="terminal.html" id="nav-term">Terminal</a>
+    <a href="mirror.html" aria-current="page" id="nav-mirror">Mirroring</a>
+  </nav>
+  <div class="grow"></div>
+  <p class="status"><span class="dot" id="status-dot"></span><span id="status">Not connected</span></p>
+</header>
+
+<form class="options" id="options" aria-label="Session options" onsubmit="return false">
+  <div class="opt"><label for="device">Device</label><select id="device"></select></div>
+  <div class="opt"><label for="version">Server version</label><select id="version"><option value="">Auto (5.0, falls back to 4.x)</option></select></div>
+  <div class="opt"><label for="max_size">Max size</label>
+    <select id="max_size"><option value="">Original</option><option>2560</option><option>1920</option><option>1600</option><option>1280</option><option>1024</option><option>800</option></select></div>
+  <div class="opt"><label for="bitrate">Bitrate</label>
+    <select id="bitrate"><option value="">Server default</option><option value="32000000">32 Mbps</option><option value="16000000">16 Mbps</option><option value="8000000">8 Mbps</option><option value="4000000">4 Mbps</option><option value="2000000">2 Mbps</option></select></div>
+  <div class="opt"><label for="max_fps">Max fps</label>
+    <select id="max_fps"><option value="">Unlimited</option><option>120</option><option>60</option><option>30</option><option>15</option></select></div>
+  <div class="checks">
+    <label><input type="checkbox" id="audio"> Audio</label>
+    <label><input type="checkbox" id="control" checked> Control</label>
+    <label><input type="checkbox" id="stay_awake" checked> Stay awake</label>
+    <label><input type="checkbox" id="screen_off"> Turn screen off</label>
+  </div>
+  <div class="grow"></div>
+  <button type="button" class="btn btn-lg btn-accent" id="connect">Connect</button>
+</form>
+
+<div class="banners" id="banners"></div>
+
+<div class="content">
+  <section class="main-col" aria-label="Device screen">
+    <div class="screen" id="stage" tabindex="0">
+      <div class="phone" id="phone">
+        <canvas id="screen" width="0" height="0"></canvas>
+        <div class="screen-placeholder" id="placeholder">
+          <span id="ph-icon"></span>
+          <p id="ph-title">Device screen</p>
+          <p class="sub" id="ph-sub">Choose a device and press Connect.</p>
+        </div>
+        <p class="fps-badge" id="fps" hidden></p>
+      </div>
+    </div>
+  </section>
+  <aside class="side-col">
+    <section class="card" aria-labelledby="nav-h">
+      <h2 id="nav-h">Device buttons</h2>
+      <div class="grid3" id="navgrid"></div>
+      <button type="button" class="hotkeys-link" id="hotkeys_btn">Hotkeys <kbd id="hotkeys_combo">Alt+/</kbd></button>
+    </section>
+    <section class="card clip" aria-labelledby="clip-h">
+      <h2 id="clip-h">Device clipboard</h2>
+      <label for="clip" class="hint">Shown here when the browser blocks clipboard access</label>
+      <textarea id="clip" rows="3" placeholder="Text copied on the device appears here"></textarea>
+      <button type="button" class="btn btn-lg btn-accent" id="clip_copy">Copy to this computer</button>
+      <button type="button" class="btn" id="clip_send">Send to device clipboard</button>
+    </section>
+  </aside>
+</div>
+<div class="logdrawer" id="logpanel" hidden aria-label="Server log"></div>
+
+<footer class="app-footer" id="footer">
+  <span id="f-profile">profile —</span><span id="f-jar">no server</span><span id="f-video">H.264</span><span id="f-audio">audio off</span><span id="f-control">control on</span><span id="f-stats"></span>
+</footer>
+<div class="modal-backdrop" id="hotkeys_panel" hidden></div>
+<textarea class="clip-fallback" id="clip_fallback" aria-hidden="true" tabindex="-1"></textarea>
+<script type="module" src="mirror.js"></script>
+</body>
+</html>

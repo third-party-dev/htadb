@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>htadb</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="app-header">
+  <a class="logo" href="index.html" id="home">ht<span>adb</span></a>
+  <nav aria-label="Pages">
+    <a href="terminal.html" id="nav-term">Terminal</a>
+    <a href="mirror.html" id="nav-mirror">Mirroring</a>
+  </nav>
+  <div class="grow"></div>
+  <p class="status"><span class="dot" id="adb-dot"></span><span id="adb-status">connecting…</span></p>
+</header>
+<div class="banners" id="banners"></div>
+<div class="wrap">
+  <section class="card" aria-labelledby="dev-h">
+    <h2 id="dev-h">Devices</h2>
+    <div class="devlist" id="devices"><p class="empty">Loading devices…</p></div>
+  </section>
+</div>
+<div class="grow"></div>
+<footer class="app-footer"><span id="f-version">htadb</span><span id="f-adb">adb server</span><span id="f-api"></span></footer>
+<script type="module" src="index.js"></script>
+</body>
+</html>
